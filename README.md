@@ -37,27 +37,25 @@
 npm install
 ```
 
-### 2. 准备模型 (重要)
-
-本项目依赖于 ONNX 格式的 SVM 模型。如果你修改了训练数据或 Python 代码，需要重新生成模型：
-
-1.  确保你已安装 Python 依赖 (`scikit-learn`, `onnx`, `skl2onnx`, `joblib`, `numpy`).
-    - _注意：请使用项目兼容的 scikit-learn 版本，或确保导出脚本正确处理了版本兼容性。_
-2.  运行导出脚本：
-    ```bash
-    python mlp/convert_to_onnx.py
-    ```
-    该脚本已优化，会自动禁用 `zipmap` 以适配 Web 端。
-3.  将生成的 `gesture_model.onnx` 移动到 `public/` 目录：
-    - 脚本运行后，请手动将 `mlp/gesture_model.onnx` 复制/覆盖到 `public/gesture_model.onnx`。
-
-### 3. 启动开发服务器
+### 2. 启动开发服务器
 
 ```bash
 npm run dev
 ```
 
 打开浏览器访问 [http://localhost:3000](http://localhost:3000) 即可使用。
+
+### 3. (可选) 模型开发
+
+**普通用户请跳过此步**。本项目已包含训练好的模型 (`public/gesture_model.onnx`)。
+只有当你修改了 `mlp/` 下的训练数据或 Python 代码并需要**重新训练**时，才需要执行以下操作：
+
+1.  确保你已安装 Python 依赖 (`scikit-learn`, `onnx`, `skl2onnx`, `joblib`, `numpy`).
+2.  运行导出脚本：
+    ```bash
+    python mlp/convert_to_onnx.py
+    ```
+3.  将生成的 `gesture_model.onnx` 移动到 `public/` 目录。
 
 ## 📂 项目结构
 
@@ -82,4 +80,3 @@ npm run dev
     - 确保 `public/` 目录下存在最新的 `gesture_model.onnx` 文件。
 
 ---
-
